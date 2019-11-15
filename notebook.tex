@@ -1,0 +1,1228 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ads}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{snapchat-political-ads}{%
+\section{Snapchat Political Ads}\label{snapchat-political-ads}}
+
+This project uses political ads data from Snapchat, a popular social
+media app. Interesting questions to consider include: - What are the
+most prevalent organizations, advertisers, and ballot candidates in the
+data? Do you recognize any? - What are the characteristics of ads with a
+large reach, i.e., many views? What may a campaign consider when
+maximizing an ad's reach? - What are the characteristics of ads with a
+smaller reach, i.e., less views? Aside from funding constraints, why
+might a campaign want to produce an ad with a smaller but more targeted
+reach? - What are the characteristics of the most expensive ads? If a
+campaign is limited on advertising funds, what type of ad may the
+campaign consider? - What groups or regions are targeted frequently?
+(For example, for single-gender campaigns, are men or women targeted
+more frequently?) What groups or regions are targeted less frequently?
+Why? Does this depend on the type of campaign? - Have the
+characteristics of ads changed over time (e.g.~over the past year)? -
+When is the most common local time of day for an ad's start date? What
+about the most common day of week? (Make sure to account for time zones
+for both questions.)
+
+\hypertarget{getting-the-data}{%
+\subsubsection{Getting the Data}\label{getting-the-data}}
+
+The data and its corresponding data dictionary is downloadable
+\href{https://www.snap.com/en-US/political-ads/}{here}. Download both
+the 2018 CSV and the 2019 CSV.
+
+The CSVs have the same filename; rename the CSVs as needed.
+
+Note that the CSVs have the exact same columns and the exact same data
+dictionaries (\texttt{readme.txt}).
+
+\hypertarget{cleaning-and-eda}{%
+\subsubsection{Cleaning and EDA}\label{cleaning-and-eda}}
+
+\begin{itemize}
+\tightlist
+\item
+  Concatenate the 2018 CSV and the 2019 CSV into one DataFrame so that
+  we have data from both years.
+\item
+  Clean the data.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Convert \texttt{StartDate} and \texttt{EndDate} into datetime. Make
+    sure the datetimes are in the correct time zone.
+  \end{itemize}
+\item
+  Understand the data in ways relevant to your question using univariate
+  and bivariate analysis of the data as well as aggregations.
+\end{itemize}
+
+\emph{Hint 1: What is the ``Z'' at the end of each timestamp?}
+
+\emph{Hint 2: \texttt{pd.to\_datetime} will be useful here.
+\texttt{Series.dt.tz\_convert} will be useful if a change in time zone
+is needed.}
+
+\emph{Tip: To visualize geospatial data, consider
+\href{https://python-visualization.github.io/folium/}{Folium} or another
+geospatial plotting library.}
+
+\hypertarget{assessment-of-missingness}{%
+\subsubsection{Assessment of
+Missingness}\label{assessment-of-missingness}}
+
+Many columns which have \texttt{NaN} values may not actually have
+missing data. How come? In some cases, a null or empty value corresponds
+to an actual, meaningful value. For example, \texttt{readme.txt} states
+the following about \texttt{Gender}:
+
+\begin{quote}
+Gender - Gender targeting criteria used in the Ad. If empty, then it is
+targeting all genders
+\end{quote}
+
+In this scenario, an empty \texttt{Gender} value (which is read in as
+\texttt{NaN} in pandas) corresponds to ``all genders''.
+
+\begin{itemize}
+\tightlist
+\item
+  Refer to the data dictionary to determine which columns do
+  \textbf{not} belong to the scenario above. Assess the missingness of
+  one of these columns.
+\end{itemize}
+
+\hypertarget{hypothesis-test-permutation-test}{%
+\subsubsection{Hypothesis Test / Permutation
+Test}\label{hypothesis-test-permutation-test}}
+
+Find a hypothesis test or permutation test to perform. You can use the
+questions at the top of the notebook for inspiration.
+
+    \hypertarget{summary-of-findings}{%
+\section{Summary of Findings}\label{summary-of-findings}}
+
+\hypertarget{introduction}{%
+\subsubsection{Introduction}\label{introduction}}
+
+The question I will be exploring is how does the amount spent on an
+advertisement affect is effectiveness (measured by impressions)? The
+main data I will use is the Spend and Impressions data, but the effect
+of other columns on spending and impressions can also be explored.
+
+\hypertarget{cleaning-and-eda}{%
+\subsubsection{Cleaning and EDA}\label{cleaning-and-eda}}
+
+To clean the data, I converted the StartDate and EndDate to pandas
+datetime objects. I also removed any outliers in the data, and during
+the hypothesis test, I filtered out ads that spent zero dollars.
+
+In my EDA, I explored the relationship between the money spent on an ad
+and the number of impressions it made. I plotted this on a linear
+regression plot and found that the two variables were positively
+correlated. However, upon examining the residual plot, I found that a
+linear regression was not an optimal fit for the data. A complex,
+customized function is likely required to model this. I then separated
+the data by whether or not an target age was specified and accidentally
+found that most ads that did not specify a target age also spent far
+less.
+
+\hypertarget{assessment-of-missingness}{%
+\subsubsection{Assessment of
+Missingness}\label{assessment-of-missingness}}
+
+In the assessment of missingness, I checked EndDate's dependency on
+StartDate. Using the permutation test with a significance level of 0.01,
+I found that the missingness of data in EndDate could be reasonably
+explained by the data in StartDate.
+
+\hypertarget{hypothesis-test}{%
+\subsubsection{Hypothesis Test}\label{hypothesis-test}}
+
+I performed a hypothesis test to determine if specifying a target age
+improves the number of impressions per spending.
+
+Null Hypothesis Specifying a target age has roughly no effect on the
+relationship between `Spend' and `Impressions'.
+
+Alternative Hypothesis: Specifying a target age increases the number of
+impressions per spending.
+
+Test Statistic: The test statistic we will be using is the mean number
+of impressions per dollar (USD) spent for ads that specified a target
+age.
+
+Significance Level: 0.05
+
+The results of the hypothesis test failed to reject the null hypothesis
+and had an extremely high p-value \textgreater{} .99 This suggests some
+underlying problems with the set-up of the test.
+
+    \hypertarget{code}{%
+\section{Code}\label{code}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format = \PYZsq{}retina\PYZsq{}  \PYZsh{} Higher resolution figures
+\end{Verbatim}
+
+
+    \hypertarget{cleaning-and-eda}{%
+\subsubsection{Cleaning and EDA}\label{cleaning-and-eda}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} load the csv files for 2018 and 2019}
+         \PY{n}{fp\PYZus{}18} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ads\PYZus{}2018.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fp\PYZus{}19} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ads\PYZus{}2019.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} read files into dataframes}
+         \PY{n}{df\PYZus{}18} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{fp\PYZus{}18}\PY{p}{)}
+         \PY{n}{df\PYZus{}19} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{fp\PYZus{}19}\PY{p}{)}
+         \PY{n}{ad\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}18}\PY{p}{,} \PY{n}{df\PYZus{}19}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}                                                 ADID  \textbackslash{}
+         0  91db2796a80472ed8c2bfa17760b3ce1471f6ec1f3147b{\ldots}   
+         1  97e3f17d5ec164c454a35d2822734482ca60be3f3af310{\ldots}   
+         2  14535fea019a9b1a910a77ce1555af8bdedbb5c78fb60a{\ldots}   
+         3  10b64550ad4a23c651d7883746cabeac93cbd92d5f3b3f{\ldots}   
+         4  2438786c60ae41cf56614885b415a72857bbfb5c06f760{\ldots}   
+         
+                                                  CreativeUrl  Spend  Impressions  \textbackslash{}
+         0  https://www.snap.com/political-ads/asset/b2c47{\ldots}   1044       137185   
+         1  https://www.snap.com/political-ads/asset/affc7{\ldots}    279        94161   
+         2  https://www.snap.com/political-ads/asset/754f6{\ldots}   6743      3149886   
+         3  https://www.snap.com/political-ads/asset/818ae{\ldots}   3698       573475   
+         4  https://www.snap.com/political-ads/asset/2c264{\ldots}    445       232906   
+         
+                       StartDate               EndDate          OrganizationName  \textbackslash{}
+         0  2018/10/30 17:45:51Z  2018/11/07 00:00:00Z                 GMMB, Inc   
+         1  2018/12/23 14:26:52Z  2018/12/28 14:28:06Z      Revolution Messaging   
+         2  2018/10/06 01:11:41Z  2018/11/07 03:00:00Z         Lockwood Strategy   
+         3  2018/11/02 16:20:57Z  2018/11/06 18:15:30Z         The Prosper Group   
+         4  2018/11/27 21:44:19Z  2019/01/13 21:43:53Z  Amnesty International UK   
+         
+                                          BillingAddress CandidateBallotInformation  \textbackslash{}
+         0             3050 K Street,Washington,20007,US                        NaN   
+         1  1730 Rhode Island Ave NW,Washington,20036,US                        NaN   
+         2                                            US                        NaN   
+         3                435 E. Main,Greenwood,46143,US                        NaN   
+         4         17-25 New Inn Yard,London,EC2A 3EA,GB                        NaN   
+         
+                PayingAdvertiserName  \textbackslash{}
+         0           JB for Governor   
+         1   Paid for by ReBuild USA   
+         2                Change Now   
+         3                   No On L   
+         4  Amnesty International UK   
+         
+                                  {\ldots}                          \textbackslash{}
+         0                        {\ldots}                           
+         1                        {\ldots}                           
+         2                        {\ldots}                           
+         3                        {\ldots}                           
+         4                        {\ldots}                           
+         
+                                                    Interests OsType  \textbackslash{}
+         0                                                NaN    NaN   
+         1  Arts \& Culture Mavens,Chat Fiction Enthusiasts{\ldots}    NaN   
+         2  TV Live Event Viewers (The Academy Awards),TV {\ldots}    NaN   
+         3                                                NaN    NaN   
+         4                                                NaN    NaN   
+         
+                          Segments LocationType Language  AdvancedDemographics  \textbackslash{}
+         0  Provided by Advertiser          NaN      NaN                   NaN   
+         1  Provided by Advertiser          NaN      NaN                   NaN   
+         2  Provided by Advertiser          NaN      NaN                   NaN   
+         3  Provided by Advertiser          NaN      NaN                   NaN   
+         4  Provided by Advertiser          NaN      NaN                   NaN   
+         
+           Targeting Connection Type Targeting Carrier (ISP)  \textbackslash{}
+         0                       NaN                     NaN   
+         1                       NaN                     NaN   
+         2                       NaN                     NaN   
+         3                       NaN                     NaN   
+         4                       NaN                     NaN   
+         
+                                  Targeting Geo - Postal Code  \textbackslash{}
+         0                                                NaN   
+         1                                                NaN   
+         2                                                NaN   
+         3  92801,92802,92803,92804,92805,92806,92807,9280{\ldots}   
+         4                                                NaN   
+         
+                                           CreativeProperties  
+         0       web\_view\_url:https://iwillvote.com/?state=il  
+         1     web\_view\_url:https://rebuildusa.info/landing-3  
+         2  web\_view\_url:https://action.socalhealthcarecoa{\ldots}  
+         3          web\_view\_url:https://www.stopmeasurel.com  
+         4  web\_view\_url:https://www.amnesty.org.uk/write-{\ldots}  
+         
+         [5 rows x 27 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} convert StartDate and EndDate to date time objects (UTC)}
+         \PY{c+c1}{\PYZsh{} timezones will not be used in our analysis}
+         \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StartDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StartDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} display the data type of each column}
+         \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 3303 entries, 0 to 2643
+Data columns (total 27 columns):
+ADID                           3303 non-null object
+CreativeUrl                    3303 non-null object
+Spend                          3303 non-null int64
+Impressions                    3303 non-null int64
+StartDate                      3303 non-null datetime64[ns]
+EndDate                        2647 non-null datetime64[ns]
+OrganizationName               3303 non-null object
+BillingAddress                 3303 non-null object
+CandidateBallotInformation     225 non-null object
+PayingAdvertiserName           3303 non-null object
+Gender                         322 non-null object
+AgeBracket                     3029 non-null object
+CountryCode                    3303 non-null object
+RegionID                       1013 non-null object
+ElectoralDistrictID            65 non-null object
+LatLongRad                     0 non-null float64
+MetroID                        180 non-null object
+Interests                      786 non-null object
+OsType                         21 non-null object
+Segments                       2189 non-null object
+LocationType                   18 non-null object
+Language                       914 non-null object
+AdvancedDemographics           96 non-null object
+Targeting Connection Type      0 non-null float64
+Targeting Carrier (ISP)        0 non-null float64
+Targeting Geo - Postal Code    399 non-null object
+CreativeProperties             2656 non-null object
+dtypes: datetime64[ns](2), float64(3), int64(2), object(20)
+memory usage: 722.5+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Exploratory Data Analysis}
+        
+        \PY{c+c1}{\PYZsh{} we will begin by examining how much is spent on ads}
+        
+        \PY{c+c1}{\PYZsh{} plot the spending data }
+        \PY{c+c1}{\PYZsh{} plot types: hist, kde, rug}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rug}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e27649aa90>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} next, we look at the effectiveness of those ads in the form of impressions}
+        
+        \PY{c+c1}{\PYZsh{} plot the impressions data }
+        \PY{c+c1}{\PYZsh{} plot types: hist, kde, rug}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rug}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e276918b00>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} looking at the plots, we see that both plots have very large outliers.}
+         \PY{c+c1}{\PYZsh{} the existance those outliers makes the above plots rather meaningless,}
+         \PY{c+c1}{\PYZsh{} so we will now remove those outliers}
+         
+         \PY{c+c1}{\PYZsh{} we define an outlier to be any datapoint greater than 3 standard deviations}
+         \PY{c+c1}{\PYZsh{} away from the mean}
+         \PY{n}{spend\PYZus{}mean} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{spend\PYZus{}std} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{spend\PYZus{}no\PYZus{}out} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{spend\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{spend\PYZus{}std} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{3}\PY{p}{]}
+         
+         
+         \PY{c+c1}{\PYZsh{} plot the spend data for with outliers removed}
+         \PY{c+c1}{\PYZsh{} plot types: hist, kde, rug}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{spend\PYZus{}no\PYZus{}out}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rug}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e277d0c898>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} repeat the process for impressions}
+         
+         \PY{n}{imp\PYZus{}mean} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{imp\PYZus{}std} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{imp\PYZus{}no\PYZus{}out} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{imp\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{imp\PYZus{}std} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{3}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} plot the impressions data for with outliers removed}
+         \PY{c+c1}{\PYZsh{} plot types: hist, kde, rug}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{imp\PYZus{}no\PYZus{}out}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rug}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{spend\PYZus{}no\PYZus{}out}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rug}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e27c9ddcf8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{c+c1}{\PYZsh{} while the distributions still look similar, the plots are significantly different}
+         
+         \PY{c+c1}{\PYZsh{} create variables of spend and imp for convenience}
+         \PY{n}{spend} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{imp} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} calculate the statistics for each data series using pandas\PYZsq{} Series.describe()}
+         \PY{c+c1}{\PYZsh{} rename the series without outliers to clarify}
+         \PY{n}{spend\PYZus{}stats} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+         \PY{n}{spend\PYZus{}no\PYZus{}out\PYZus{}stats} \PY{o}{=} \PY{n}{spend\PYZus{}no\PYZus{}out}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend no outliers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{imp\PYZus{}stats} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+         \PY{n}{imp\PYZus{}no\PYZus{}out\PYZus{}stats} \PY{o}{=} \PY{n}{imp\PYZus{}no\PYZus{}out}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions no outliers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} display summary stats in data frame}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}
+             \PY{n}{spend\PYZus{}stats}\PY{p}{,} 
+             \PY{n}{spend\PYZus{}no\PYZus{}out\PYZus{}stats}\PY{p}{,} 
+             \PY{n}{imp\PYZus{}stats}\PY{p}{,} 
+             \PY{n}{imp\PYZus{}no\PYZus{}out\PYZus{}stats}
+         \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:}                           count           mean           std  min      25\%  \textbackslash{}
+         Spend                    3303.0    1564.264608  9.679614e+03  0.0     41.0   
+         Spend no outliers        3282.0    1005.408592  2.626486e+03  0.0     41.0   
+         Impressions              3303.0  670984.530427  3.949157e+06  1.0  13468.0   
+         Impressions no outliers  3277.0  422870.233750  1.133705e+06  1.0  13333.0   
+         
+                                      50\%        75\%          max  
+         Spend                      184.0     797.50     319467.0  
+         Spend no outliers          178.0     774.75      29215.0  
+         Impressions              68914.0  316056.50  150532010.0  
+         Impressions no outliers  67449.0  304845.00   12414920.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{c+c1}{\PYZsh{} looking at the counts column, we see that we retained most of the data}
+          
+          
+          \PY{c+c1}{\PYZsh{} we will now plot spend and impressions against each other}
+          
+          \PY{c+c1}{\PYZsh{} get a dataframe with outliers in spend and impressions removed}
+          \PY{n}{data\PYZus{}no\PYZus{}out} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}
+              \PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{spend\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{spend\PYZus{}std} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{\PYZam{}} 
+              \PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{imp\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{imp\PYZus{}std} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)}
+          \PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} plot the linear regression plot for Spend and Impressions}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data\PYZus{}no\PYZus{}out}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}118}]:} <seaborn.axisgrid.FacetGrid at 0x1e2079b4ef0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{c+c1}{\PYZsh{} to check how well this regression line fits, we can look at the residual plot}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{residplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data\PYZus{}no\PYZus{}out}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e207a0e860>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{c+c1}{\PYZsh{} the data is not scattered above and below the regression line randomly; however, }
+          \PY{c+c1}{\PYZsh{} modelling this data accurately appears to require a complex, customized function}
+          
+          
+          \PY{c+c1}{\PYZsh{} we can compare these residuals to the residuals we would have had we not removed the outliers}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{residplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{ad\PYZus{}data}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}123}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e209437438>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It seems as if the removal of outliers did in fact improve the
+usefulness of our plots/visualizations.
+
+We can also look at how other variables affect the relationship between
+Spend and Impressions; we can split the data into ads that target an age
+demographic (non null values) and ads that do not target an age
+demographic (null values).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{c+c1}{\PYZsh{} create a new data frame with relevant columns}
+          \PY{n}{spend\PYZus{}imp\PYZus{}by\PYZus{}age} \PY{o}{=} \PY{n}{data\PYZus{}no\PYZus{}out}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} add a column \PYZsq{}NullAge\PYZsq{} that is True if the ad has a null value in \PYZsq{}AgeBracket\PYZsq{} and False otherwise}
+          \PY{n}{spend\PYZus{}imp\PYZus{}by\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NullAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{spend\PYZus{}imp\PYZus{}by\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} plot the linear regression plots separated by \PYZsq{}NullAge\PYZsq{}}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{spend\PYZus{}imp\PYZus{}by\PYZus{}age}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NullAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}125}]:} <seaborn.axisgrid.FacetGrid at 0x1e20953acf8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Based on the plot, it seems as if targeting age has roughly no effect on
+relationship between `Spend' and `Impressions'. However, a notable
+feature of this plot is that the majority of the ads that did not
+specify a target age group spent relatively little (\textless{}\$5000)
+on the ad. A possible explanation for this is that Snapchat charges more
+for ads that specify certain demographics. Another explanation could be
+that only larger companies and organizations have the need or prior data
+to specify a target demographic. Further reserach and analysis is
+required to determine the reason for this.
+
+    \hypertarget{assessment-of-missingness}{%
+\subsubsection{Assessment of
+Missingness}\label{assessment-of-missingness}}
+
+    To start, we will find the proportion of null values for each column.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{c+c1}{\PYZsh{} get the proportion of null values for each column}
+          \PY{n}{prop\PYZus{}null} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{c+c1}{\PYZsh{} \PYZgt{} 0}
+          \PY{c+c1}{\PYZsh{} find the columns with null values}
+          \PY{n}{has\PYZus{}null} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{prop\PYZus{}null}\PY{p}{[}\PY{n}{prop\PYZus{}null} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} the proportion of null values in each column}
+          \PY{n}{prop\PYZus{}null}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}133}]:} ADID                           0.000000
+          CreativeUrl                    0.000000
+          Spend                          0.000000
+          Impressions                    0.000000
+          StartDate                      0.000000
+          EndDate                        0.198607
+          OrganizationName               0.000000
+          BillingAddress                 0.000000
+          CandidateBallotInformation     0.931880
+          PayingAdvertiserName           0.000000
+          Gender                         0.902513
+          AgeBracket                     0.082955
+          CountryCode                    0.000000
+          RegionID                       0.693309
+          ElectoralDistrictID            0.980321
+          LatLongRad                     1.000000
+          MetroID                        0.945504
+          Interests                      0.762035
+          OsType                         0.993642
+          Segments                       0.337269
+          LocationType                   0.994550
+          Language                       0.723282
+          AdvancedDemographics           0.970936
+          Targeting Connection Type      1.000000
+          Targeting Carrier (ISP)        1.000000
+          Targeting Geo - Postal Code    0.879201
+          CreativeProperties             0.195883
+          dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{c+c1}{\PYZsh{} the following columns have null values}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{has\PYZus{}null}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0                         EndDate
+1      CandidateBallotInformation
+2                          Gender
+3                      AgeBracket
+4                        RegionID
+5             ElectoralDistrictID
+6                      LatLongRad
+7                         MetroID
+8                       Interests
+9                          OsType
+10                       Segments
+11                   LocationType
+12                       Language
+13           AdvancedDemographics
+14      Targeting Connection Type
+15        Targeting Carrier (ISP)
+16    Targeting Geo - Postal Code
+17             CreativeProperties
+dtype: object
+
+    \end{Verbatim}
+
+    Based on the readme.txt provided with the data, the following columns
+have values missing by design:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Gender:} if null, then target all genders
+\item
+  \textbf{AgeBracket:} if null, then target all ages
+\item
+  \textbf{RegionID:} if null, then target all regions in target country
+\item
+  \textbf{ElectoralDistrickID:} if null, then target all electoral
+  districts in the target country
+\item
+  \textbf{LatLongRad:} if null, then target all lat/long in the target
+  country
+\item
+  \textbf{MetroID:} if null, then target all metros in the target
+  country
+\item
+  \textbf{Interests:} if null, then the ad is agnostic to interests
+\item
+  \textbf{OsType:} if null, then target all operating systems
+\item
+  \textbf{Language:} if null, then the ad is agnostic to language
+\item
+  \textbf{AdvancedDemographics:} if null, then the ad is agnostic to 3rd
+  party data segments
+\item
+  \textbf{Targeting Connection Type:} if null, then the ad is agnostic
+  to internet connection type
+\item
+  \textbf{Targeting Carrier (ISP):} if null, then the ad is agnostic to
+  carrier type
+\item
+  \textbf{Targeting Geo-Postal Code:} if null, then targets all postal
+  codes in the target country
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{c+c1}{\PYZsh{} columns missing by design}
+          \PY{n}{mbd} \PY{o}{=} \PY{p}{[}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ElectoralDistrictID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LatLongRad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MetroID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OsType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AdvancedDemographics}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Targeting Connection Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Targeting Carrier (ISP)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Targeting Geo \PYZhy{} Postal Code}\PY{l+s+s1}{\PYZsq{}}
+          \PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} get the column names that are not missing by design}
+          \PY{n}{not\PYZus{}mbd} \PY{o}{=} \PY{n}{has\PYZus{}null}\PY{p}{[}\PY{n}{has\PYZus{}null}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{mbd}\PY{p}{)} \PY{o}{==} \PY{k+kc}{False}\PY{p}{]}
+          \PY{n}{not\PYZus{}mbd}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}135}]:} 0                        EndDate
+          1     CandidateBallotInformation
+          10                      Segments
+          11                  LocationType
+          17            CreativeProperties
+          dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{c+c1}{\PYZsh{} the proportion of nulls for the remaining columns}
+          \PY{n}{prop\PYZus{}null}\PY{p}{[}\PY{n}{not\PYZus{}mbd}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:} EndDate                       0.198607
+          CandidateBallotInformation    0.931880
+          Segments                      0.337269
+          LocationType                  0.994550
+          CreativeProperties            0.195883
+          dtype: float64
+\end{Verbatim}
+            
+    Based on the readme.txt file given with the data, it is fairly
+reasonable to believe that the missingness in these columns can be
+explained by: * \textbf{EndDate}: if null, then the advertisement is
+ongoing * \textbf{CandidateBallotInformation}: if null, then the
+advertisement was not for a political candidate * \textbf{Segments}: if
+null, the advertiser did not provide a segment targeting criteria *
+\textbf{LocationType}: if null, the advertiser did not specify a
+location target * \textbf{CreativeProperties}: if null, the
+advertisement did not link to a url
+
+We will analyze the missingness of `EndDate'. Based on our assumption,
+we would expect more recent advertisements to have more missing values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}307}]:} \PY{c+c1}{\PYZsh{} create a table with relevant columns: start and end dates}
+          \PY{n}{dates} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StartDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} add a boolean column to dates that is True when EndDate is null and False otherwise}
+          \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndNull}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} get the date of the earliest ad start}
+          \PY{n}{earliest\PYZus{}ad} \PY{o}{=} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StartDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} add time delta from the earliest start date in nanoseconds}
+          \PY{c+c1}{\PYZsh{} this allows us to calculate statistics such as the mean}
+          \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TimeDelta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StartDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{start} \PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}timedelta}\PY{p}{(}\PY{n}{start} \PY{o}{\PYZhy{}} \PY{n}{earliest\PYZus{}ad}\PY{p}{)}\PY{o}{.}\PY{n}{delta}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} pd.to\PYZus{}timedelta(dates[\PYZsq{}EndDate\PYZsq{}].iloc[0] \PYZhy{} earliest\PYZus{}ad)}
+          \PY{c+c1}{\PYZsh{} dates.groupby(\PYZsq{}EndNull\PYZsq{}).()}
+          \PY{n}{mean\PYZus{}by\PYZus{}EndNull} \PY{o}{=} \PY{n}{dates}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndNull}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          
+          
+          
+          \PY{c+c1}{\PYZsh{} calculate observed statistic: difference in means}
+          \PY{n}{obs} \PY{o}{=} \PY{n}{mean\PYZus{}by\PYZus{}EndNull}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+          
+          \PY{c+c1}{\PYZsh{} display the average time delta grouped by EndNull}
+          \PY{n}{mean\PYZus{}by\PYZus{}EndNull}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}307}]:}                  TimeDelta
+          EndNull                   
+          False    28335144985266584
+          True     33283332955792772
+\end{Verbatim}
+            
+    It is difficult to assess the difference in nanoseconds, so let us find
+the difference as a timedelta.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{c+c1}{\PYZsh{} take the difference in nanoseconds and convert to timedelta}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}timedelta}\PY{p}{(}\PY{n}{mean\PYZus{}by\PYZus{}EndNull}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}212}]:} TimeDelta   57 days 06:29:47.970526
+          Name: True, dtype: timedelta64[ns]
+\end{Verbatim}
+            
+    We will now perform a permutation test to determine if `EndDate' is
+dependent on `StartDate'.
+
+We set a significance level of 0.01
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}334}]:} \PY{c+c1}{\PYZsh{} let N be the number of repetitions for the permutation test}
+          \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{500}
+          
+          \PY{c+c1}{\PYZsh{} list to store the simulated statistics}
+          \PY{n}{stats} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+              
+              \PY{c+c1}{\PYZsh{} shuffle the EndNull column}
+              \PY{n}{shuffled\PYZus{}EndNull} \PY{o}{=} \PY{p}{(}
+                  \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndNull}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                  \PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{frac}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} put them in a table}
+              \PY{n}{shuffled} \PY{o}{=} \PY{p}{(}
+                  \PY{n}{dates}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{p}{\PYZob{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndNull}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{shuffled\PYZus{}EndNull}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TimeDelta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TimeDelta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                  \PY{p}{\PYZcb{}}\PY{p}{)}
+              \PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} compute the differences in means}
+              \PY{c+c1}{\PYZsh{} gets the time delta in nanoseconds as a float}
+              \PY{n}{mean} \PY{o}{=} \PY{n}{shuffled}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndNull}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{stats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mean}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}335}]:} \PY{c+c1}{\PYZsh{} calculate the p\PYZus{}value: how many differences are greater than }
+          \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{p}{(}\PY{n}{stats} \PY{o}{\PYZgt{}} \PY{n}{obs}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{n}{p\PYZus{}value}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}335}]:} 0.0
+\end{Verbatim}
+            
+    With a p-value of 0.0 and a significance level of 0.01, we can assume
+that the missingness of EndDate is dependent on StartDate.
+
+    \hypertarget{hypothesis-test}{%
+\subsubsection{Hypothesis Test}\label{hypothesis-test}}
+
+    Earlier, we noted how specifying a target age had roughly no effect on
+relationship between `Spend' and `Impressions'. However, the plot shows
+that ads specifying a target age have slightly more impressions per
+spending than ads that do not specify a target age. We will perform a
+hypothesis test to rigorously determine if specifying a target age does
+improve the number of impressions per spending.
+
+\hypertarget{null-hypothesis}{%
+\paragraph{Null Hypothesis}\label{null-hypothesis}}
+
+Specifying a target age has roughly no effect on the relationship
+between `Spend' and `Impressions'.
+
+\hypertarget{alternative-hypothesis}{%
+\paragraph{Alternative Hypothesis:}\label{alternative-hypothesis}}
+
+Specifying a target age increases the number of impressions per
+spending.
+
+\hypertarget{test-statistic}{%
+\paragraph{Test Statistic:}\label{test-statistic}}
+
+The test statistic we will be using is the mean number of impressions
+per dollar (USD) spent for ads that specified a target age.
+
+\textbf{Significance Level:} 0.05
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}389}]:} \PY{c+c1}{\PYZsh{} we will use the data without outliers, as that was the data used in the plot}
+          
+          \PY{c+c1}{\PYZsh{} select the relevant columns}
+          \PY{n}{age\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}no\PYZus{}out}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} add a column \PYZsq{}NullAge\PYZsq{} that is True if the ad has a null value in \PYZsq{}AgeBracket\PYZsq{} and False otherwise}
+          \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NullAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{spend\PYZus{}imp\PYZus{}by\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} since some ads spent 0 dollars, drop those values (there are 60 of those ads)}
+          \PY{n}{age\PYZus{}data} \PY{o}{=} \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} add a column containing the number of impressions per dollar spent for each ad}
+          \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ImpPerSpend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          
+          \PY{c+c1}{\PYZsh{} display the table}
+          \PY{n}{age\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}389}]:}    Spend  Impressions AgeBracket  NullAge  ImpPerSpend
+          0   1044       137185       35++    False   131.403257
+          1    279        94161        18+    False   337.494624
+          2   6743      3149886        NaN     True   467.134213
+          3   3698       573475        18+    False   155.077069
+          4    445       232906        25+    False   523.384270
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}393}]:} \PY{c+c1}{\PYZsh{} calculate the observed statistic}
+          
+          \PY{n}{grouped\PYZus{}age} \PY{o}{=} \PY{n}{age\PYZus{}data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NullAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} calculate the observed statistic}
+          \PY{c+c1}{\PYZsh{} if NullAge is False, the ad specified a target age}
+          \PY{n}{obs} \PY{o}{=} \PY{n}{grouped\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{k+kc}{False}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ImpPerSpend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} display the observed statistic}
+          \PY{n}{obs}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}393}]:} 453.5088083470662
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}404}]:} \PY{c+c1}{\PYZsh{} let N be the number of simulations}
+          \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{10000}
+          
+          \PY{c+c1}{\PYZsh{} store each simulation\PYZsq{}s result in a list}
+          \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} get the number of ads that specified a target age}
+          \PY{c+c1}{\PYZsh{} the number of ads minus the number of ads that did not specify a target age}
+          \PY{n}{num\PYZus{}specified} \PY{o}{=} \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NullAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{size} \PY{o}{\PYZhy{}} \PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NullAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} take a sample the size of num\PYZus{}specified of ads\PYZsq{} ImpPerSpend}
+              \PY{n}{simulation} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{age\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ImpPerSpend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{num\PYZus{}specified}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} add the mean to results}
+              \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{simulation}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}405}]:} \PY{c+c1}{\PYZsh{} calculate the p\PYZus{}value}
+          \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{p}{(}\PY{n}{results} \PY{o}{\PYZgt{}} \PY{n}{obs}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{n}{p\PYZus{}value}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}405}]:} 0.9915
+\end{Verbatim}
+            
+    With a p-value of 0.9915, we fail to reject the null hypothesis. In
+fact, it seems more likely that not specifying a target age-group
+increases the number of impressions per dollar spent. There is likely a
+confounding factor for this result: ads that did not specify a target
+age also spent far less on the advertisement.
+
+The issue may lie with the test statistic; perhaps the number of
+impressions per dollar spent strongly favors ads that spent less money.
+
+    \hypertarget{further-exploration}{%
+\section{Further Exploration}\label{further-exploration}}
+
+Our hypothesis test had a rather surprising result. Because of this, we
+should analyze the ads that paid little to no money. How were they able
+to advertise? It is likely that they share some special characteristic,
+such as being a charity or non-profit ad.
+
+Here, we found that spending had a positive correlation with
+impressions. We could identify the data points with high and low
+residuals to search for defining characteristics. To be very thorough,
+this would involve viewing the ad itself and quantifying visual and
+aural data. Other characteristics to explore could be the duration of
+the ad, the color scheme, the inclusion of music, the presence of a
+human face, or the use of on-screen text.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
