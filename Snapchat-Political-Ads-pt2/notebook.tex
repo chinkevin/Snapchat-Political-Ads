@@ -1,0 +1,1685 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ads}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{snapchat-political-ads}{%
+\section{Snapchat Political Ads}\label{snapchat-political-ads}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{See the main project notebook for instructions to be sure you
+  satisfy the rubric!}
+\item
+  See Project 03 for information on the dataset.
+\item
+  A few example prediction questions to pursue are listed below.
+  However, don't limit yourself to them!
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Predict the reach (number of views) of an ad.
+  \item
+    Predict how much was spent on an ad.
+  \item
+    Predict the target group of an ad. (For example, predict the target
+    gender.)
+  \item
+    Predict the (type of) organization/advertiser behind an ad.
+  \end{itemize}
+\end{itemize}
+
+Be careful to justify what information you would know at the ``time of
+prediction'' and train your model using only those features.
+
+    \hypertarget{summary-of-findings}{%
+\section{Summary of Findings}\label{summary-of-findings}}
+
+\hypertarget{introduction}{%
+\subsubsection{Introduction}\label{introduction}}
+
+We will try to predict the number of impressions made by an ad. This is
+because the number of impressions the only measure of success we have
+for each advertisement. Since the number of impressions is a numerical
+value, we will be using a regression model for this problem. Our goal is
+to create a model that best predicts the number of impressions an ad
+will receive based on its other data, so we will try to maximize our
+model's score (R2). This is a measure of how well our model predicts
+impressions.
+
+\hypertarget{baseline-model}{%
+\subsubsection{Baseline Model}\label{baseline-model}}
+
+For our baseline model, we dropped name/label that should have no effect
+on the number of impressions, and date columns that our model would have
+a hard time processing. We split the columns into two categories:
+categorical and numerical.
+
+We first imputed the categorical columns with string 'NULL's; this is
+justifiable because most of the null values were intentionally null, so
+they can be treated as their own category. We then one hot encoded these
+columns and used PCA (principle component analysis) to reduce the
+dimensionality of our data and remove excess columns that are highly
+correlated.
+
+We then imputed the numerical columns with zeroes; this is justifiable
+because intentionally null values in numerical columns most commonly
+represent zeroes.
+
+From looking at the data and its columns, we predicted that the number
+of impressions would be positively and linearly correlated with the
+amount spent on the advertisement. Hence, we chose to use a linear
+regression model.
+
+In 100 train test splits, baseline model had a median score of 0.52.
+While this is not good, it is not too bad considering the mininmal
+feature engineering we had done. In addition, much of the provided data
+is null, and many columns seem irrelevant to how many impressions an ad
+received.
+
+\hypertarget{final-model}{%
+\subsubsection{Final Model}\label{final-model}}
+
+For our final model, we dropped some additional columns that were
+entirely null or represented geographical data. Our reason for removing
+the latter was because the data contained many columns describing
+geographical location. To avoid overfitting, we removed some of these
+columns and kept the simplest one with no null values: `CountryCode'.\\
+We then altered many of the columns into boolean columns. We did this
+because many columns were filled with mostly null values (intentionally)
+and there were very few instances of each non-null value, which made
+treating those columns as categorical prone to overfitting. To fix this,
+we altered the data so null values were True and non-null values were
+False. To reduce the number of categories in `Language', we grouped
+languages specified less than 50 times into its own category `other'. We
+also imputed null values with `any'. To reduce the number of categories
+in `AgeBracket', we kept only the lower bound of each age bracket. This
+also gave us the option of treating `AgeBracket' as a numerical column.
+
+To select a model, we used a pipeline to test many different models on
+the same data. We tested: * LinearRegression * KNeighborsRegressor * SVR
+* NuSVR * DecisionTreeRegressor * RandomForestRegressor *
+AdaBoostRegressor * GradientBoostingRegressor
+
+We found that linear regression had the highest score and still provided
+the best model. For the PCA, we found that when n\_components = 0.95,
+the model performed the best.
+
+\hypertarget{fairness-evaluation}{%
+\subsubsection{Fairness Evaluation}\label{fairness-evaluation}}
+
+Because our model is a regression model, we decided to test the fairness
+of our model using squared error. We created a new column for squared
+error and grouped each categorical column. We then calculated the mean
+squared error and plotted our results. One of the plots that stood out
+was the segments plot because the Segments is a boolean column with a
+fair number of ads in both categories.
+
+Thus, we performed a permutation test on to see if the difference in
+mean squared error between the ads that did and did not provide segments
+could be explained by chance. From our test, our observed test statistic
+(absolute difference in mean squared error) has a p-value of 0.644. Our
+significance level was set to 0.01, so we failed to reject our null
+hypothesis. Therefore, we assumed that our model was not biased towards
+ads that did or did not specify segments.
+
+    \hypertarget{code}{%
+\section{Code}\label{code}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format = \PYZsq{}retina\PYZsq{}  \PYZsh{} Higher resolution figures
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}182}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OneHotEncoder}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OrdinalEncoder}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{FunctionTransformer}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{impute} \PY{k}{import} \PY{n}{SimpleImputer}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVR}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{NuSVR}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{AdaBoostRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{Pipeline}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{compose} \PY{k}{import} \PY{n}{ColumnTransformer}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+\end{Verbatim}
+
+
+    We will begin by performing minimal cleaning of the data: * Join the
+2018 and 2019 data * Drop columns with irrelevant data (names, ids,
+labels, etc.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{c+c1}{\PYZsh{} load the csv files for 2018 and 2019}
+          \PY{n}{fp\PYZus{}18} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ads\PYZus{}2018.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{fp\PYZus{}19} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ads\PYZus{}2019.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{rel\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          
+          \PY{c+c1}{\PYZsh{} read files into dataframes}
+          \PY{n}{df\PYZus{}18} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{fp\PYZus{}18}\PY{p}{)}\PY{c+c1}{\PYZsh{}, \PYZsh{}usecols=rel\PYZus{}cols)}
+          \PY{n}{df\PYZus{}19} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{fp\PYZus{}19}\PY{p}{)}\PY{c+c1}{\PYZsh{}, \PYZsh{}usecols=rel\PYZus{}cols)}
+          \PY{n}{ad\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}18}\PY{p}{,} \PY{n}{df\PYZus{}19}\PY{p}{]}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} if planning to use dates, convert to datetime objects}
+          
+          \PY{c+c1}{\PYZsh{} convert StartDate and EndDate to date time objects (UTC)}
+          \PY{c+c1}{\PYZsh{} ad\PYZus{}data[\PYZsq{}StartDate\PYZsq{}] = pd.to\PYZus{}datetime(ad\PYZus{}data[\PYZsq{}StartDate\PYZsq{}])}
+          \PY{c+c1}{\PYZsh{} ad\PYZus{}data[\PYZsq{}EndDate\PYZsq{}] = pd.to\PYZus{}datetime(ad\PYZus{}data[\PYZsq{}EndDate\PYZsq{}])}
+          
+          \PY{c+c1}{\PYZsh{} drop identification/name columns: these should have no effect on the number of impressions}
+          \PY{c+c1}{\PYZsh{} timezones will not be used in our analysis}
+          \PY{n}{ad\PYZus{}data} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CreativeUrl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OrganizationName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PayingAdvertiserName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CreativeProperties}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StartDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndDate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{orig\PYZus{}data} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}152}]:}    Spend  Impressions                                BillingAddress  \textbackslash{}
+          0   1044       137185             3050 K Street,Washington,20007,US   
+          1    279        94161  1730 Rhode Island Ave NW,Washington,20036,US   
+          2   6743      3149886                                            US   
+          3   3698       573475                435 E. Main,Greenwood,46143,US   
+          4    445       232906         17-25 New Inn Yard,London,EC2A 3EA,GB   
+          
+            CandidateBallotInformation Gender AgeBracket     CountryCode    RegionID  \textbackslash{}
+          0                        NaN    NaN       35++   united states    Illinois   
+          1                        NaN    NaN        18+   united states  California   
+          2                        NaN    NaN        NaN   united states         NaN   
+          3                        NaN    NaN        18+   united states         NaN   
+          4                        NaN    NaN        25+  united kingdom         NaN   
+          
+                  ElectoralDistrictID  LatLongRad MetroID  \textbackslash{}
+          0                       NaN         NaN     NaN   
+          1                       NaN         NaN     NaN   
+          2  California 25th District         NaN     NaN   
+          3                       NaN         NaN     NaN   
+          4                       NaN         NaN     NaN   
+          
+                                                     Interests OsType  \textbackslash{}
+          0                                                NaN    NaN   
+          1  Arts \& Culture Mavens,Chat Fiction Enthusiasts{\ldots}    NaN   
+          2  TV Live Event Viewers (The Academy Awards),TV {\ldots}    NaN   
+          3                                                NaN    NaN   
+          4                                                NaN    NaN   
+          
+                           Segments LocationType Language AdvancedDemographics  \textbackslash{}
+          0  Provided by Advertiser          NaN      NaN                  NaN   
+          1  Provided by Advertiser          NaN      NaN                  NaN   
+          2  Provided by Advertiser          NaN      NaN                  NaN   
+          3  Provided by Advertiser          NaN      NaN                  NaN   
+          4  Provided by Advertiser          NaN      NaN                  NaN   
+          
+             Targeting Connection Type  Targeting Carrier (ISP)  \textbackslash{}
+          0                        NaN                      NaN   
+          1                        NaN                      NaN   
+          2                        NaN                      NaN   
+          3                        NaN                      NaN   
+          4                        NaN                      NaN   
+          
+                                   Targeting Geo - Postal Code  
+          0                                                NaN  
+          1                                                NaN  
+          2                                                NaN  
+          3  92801,92802,92803,92804,92805,92806,92807,9280{\ldots}  
+          4                                                NaN  
+\end{Verbatim}
+            
+    \hypertarget{baseline-model}{%
+\subsubsection{Baseline Model}\label{baseline-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} drop the target column; drop datetime objects}
+        \PY{n}{X} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Impressions}
+        
+        \PY{n}{types} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{dtypes}
+        \PY{n}{cat\PYZus{}cols} \PY{o}{=} \PY{n}{types}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{types} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{object}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+        \PY{n}{num\PYZus{}cols} \PY{o}{=} \PY{n}{types}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{types} \PY{o}{!=} \PY{n}{np}\PY{o}{.}\PY{n}{object}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+        
+        \PY{c+c1}{\PYZsh{} display }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical columns:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cat\PYZus{}cols}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{numerical columns:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{num\PYZus{}cols}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+categorical columns:
+ ['BillingAddress' 'CandidateBallotInformation' 'Gender' 'AgeBracket'
+ 'CountryCode' 'RegionID' 'ElectoralDistrictID' 'MetroID' 'Interests'
+ 'OsType' 'Segments' 'LocationType' 'Language' 'AdvancedDemographics'
+ 'Targeting Geo - Postal Code'] 
+
+numerical columns:
+ ['Spend' 'LatLongRad' 'Targeting Connection Type'
+ 'Targeting Carrier (ISP)']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{cats} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{impute}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NULL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ohe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{handle\PYZus{}unknown}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{PCA}\PY{p}{(}\PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{)}
+        \PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{ct} \PY{o}{=} \PY{n}{ColumnTransformer}\PY{p}{(}\PY{p}{[}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat\PYZus{}cols}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cats}\PY{p}{,} \PY{n}{cat\PYZus{}cols}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}cols}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}cols}\PY{p}{)}
+        \PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{pl} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ct}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} pl = Pipeline([(\PYZsq{}feats\PYZsq{}, ct), (\PYZsq{}reg\PYZsq{}, RandomForestRegressor(n\PYZus{}estimators=100))])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} separate the data into training (70\PYZpc{}) and testing (30\PYZpc{}) sets}
+        \PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} fit the model to the training set}
+        \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} calculate the score using the test set}
+        \PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0.6182396490316843
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} predicted values using the model}
+        \PY{n}{preds} \PY{o}{=} \PY{n}{pl}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} calculate the root mean square error}
+        \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{preds} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}ts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 1822852.8233084541
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{output} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         
+             \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+             \PY{n}{output}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+        \PY{n}{scores}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{positive scores in model builds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    The existence of negative outliers makes this histogram rather useless,
+so we will re-plot only the positive scores. Since there are negative
+outliers, we know that the mean would be skewed to the left, so to
+measure center, we will use the median.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{scores}\PY{p}{[}\PY{n}{scores}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{positive scores in model builds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scores}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+median score: 0.5240352197578249
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    For our baseline model, in 100 train test splits, we got a median model
+score of about 0.52
+
+    \hypertarget{exploratory-data-analysis}{%
+\subsubsection{Exploratory Data
+Analysis}\label{exploratory-data-analysis}}
+
+Plot the number of impressions by spending, separating by color whether
+or not certain specifications were made.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{c+c1}{\PYZsh{} examine the data types}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3303 entries, 0 to 3302
+Data columns (total 20 columns):
+Spend                          3303 non-null int64
+Impressions                    3303 non-null int64
+BillingAddress                 3303 non-null object
+CandidateBallotInformation     225 non-null object
+Gender                         322 non-null object
+AgeBracket                     3029 non-null object
+CountryCode                    3303 non-null object
+RegionID                       1013 non-null object
+ElectoralDistrictID            65 non-null object
+LatLongRad                     0 non-null float64
+MetroID                        180 non-null object
+Interests                      786 non-null object
+OsType                         21 non-null object
+Segments                       2189 non-null object
+LocationType                   18 non-null object
+Language                       914 non-null object
+AdvancedDemographics           96 non-null object
+Targeting Connection Type      0 non-null float64
+Targeting Carrier (ISP)        0 non-null float64
+Targeting Geo - Postal Code    399 non-null object
+dtypes: float64(3), int64(2), object(15)
+memory usage: 516.2+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{c+c1}{\PYZsh{} examine proportion of null data in each column}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}154}]:} Spend                          0.000000
+          Impressions                    0.000000
+          BillingAddress                 0.000000
+          CandidateBallotInformation     0.931880
+          Gender                         0.902513
+          AgeBracket                     0.082955
+          CountryCode                    0.000000
+          RegionID                       0.693309
+          ElectoralDistrictID            0.980321
+          LatLongRad                     1.000000
+          MetroID                        0.945504
+          Interests                      0.762035
+          OsType                         0.993642
+          Segments                       0.337269
+          LocationType                   0.994550
+          Language                       0.723282
+          AdvancedDemographics           0.970936
+          Targeting Connection Type      1.000000
+          Targeting Carrier (ISP)        1.000000
+          Targeting Geo - Postal Code    0.879201
+          dtype: float64
+\end{Verbatim}
+            
+    There are a few columns that only null values. We will remove these
+columns. We also see that many columns are about geographical location:
+* BillingAddress: no null values, but fairly unique (there are 199
+different addresses) * CountryCode: no null values * RegionID: some null
+values * ElectoralDistrictID: very high null proportion * MetroID: very
+high null proportion * LocationType: very high null proportion *
+Targeting Geo - Postal Code: high null proportion\\
+Since CountryCode has no null values, we will use only CountryCode for
+geographical data. All of these columns are being removed to improve
+efficiency and reduce the effects of overfitting.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{c+c1}{\PYZsh{} drop columns with only null values}
+          \PY{n}{ad\PYZus{}data} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}
+              \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}
+              \PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:} Index(['Spend', 'Impressions', 'BillingAddress', 'CandidateBallotInformation',
+                 'Gender', 'AgeBracket', 'CountryCode', 'RegionID',
+                 'ElectoralDistrictID', 'MetroID', 'Interests', 'OsType', 'Segments',
+                 'LocationType', 'Language', 'AdvancedDemographics',
+                 'Targeting Geo - Postal Code'],
+                dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{c+c1}{\PYZsh{} drop the remaining geographical data columns other than CountryCode}
+          \PY{n}{ad\PYZus{}data} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BillingAddress}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Targeting Geo \PYZhy{} Postal Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    We will now examine the `Segments' column.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Segments}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}157}]:} Provided by Advertiser    2189
+          Name: Segments, dtype: int64
+\end{Verbatim}
+            
+    We see that segments only has two types of entries: `Provided by
+Advertiser' and NaN. Thus, it makes more sense to treat `Segments' as a
+boolean column that is: * True, if the advertiser did not provide user
+specific data (NaN) * False, if the advertiser provided user specific
+data (`Provided by Advertiser')
+
+We will now see the effect providing a segment has on the number of
+impressions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{c+c1}{\PYZsh{} select impressions and segments}
+          \PY{n}{segments} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} convert segments into boolean column}
+          \PY{n}{segments}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{segments}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{segments}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}158}]:}             Impressions
+          Segments               
+          False     772037.610324
+          True      472416.135548
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{n}{segments}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}159}]:}           Impressions
+          Segments             
+          False            2189
+          True             1114
+\end{Verbatim}
+            
+    It seems as if specifying a segment (False) corresponds to a higher
+impression count, however, there are likely other confounding variables
+affecting this. We will now examine other columns affects on impressions
+in a similar manner.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{c+c1}{\PYZsh{} CountryCode}
+          \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{c+c1}{\PYZsh{}.min()}
+          
+          \PY{c+c1}{\PYZsh{} Interests}
+          \PY{c+c1}{\PYZsh{} since interests are also rather unique, and a large portion of the data is null, }
+          \PY{c+c1}{\PYZsh{} we will convert interests into a boolean column:}
+          \PY{c+c1}{\PYZsh{} True if null, False if interests were provided}
+          \PY{n}{interests} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} convert segments into boolean column}
+          \PY{n}{interests}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{interests}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}
+          \PY{n}{interests}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x256f9181be0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We want a way to convert AgeBracket into a numerical value. We can do
+this by keeping only the lower bound of the AgeBracket data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{c+c1}{\PYZsh{} Using regex, remove all symbols and any successive digits}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{AgeBracket} \PY{o}{=} \PY{p}{(}
+              \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{AgeBracket}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZca{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d]+}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} impute null values with 0, because these ads are agnostic to age}
+              \PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} convert data type from object to integer}
+              \PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{p}{)}
+          
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{AgeBracket}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}161}]:} 0    35
+          1    18
+          2     0
+          3    18
+          4    25
+          Name: AgeBracket, dtype: int32
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{c+c1}{\PYZsh{} AgeBracket}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}162}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x256f92646d8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We will now look at the language category.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}163}]:} en       578
+          fr        96
+          nb        62
+          nl        45
+          da        33
+          de        24
+          en,es     23
+          es        16
+          ar        11
+          nb,en      6
+          nl,en      5
+          sv         4
+          fi         4
+          ar,en      3
+          de,en      2
+          en,de      1
+          es,en      1
+          Name: Language, dtype: int64
+\end{Verbatim}
+            
+    We see that the most common language is English by far, and that there
+are some languages that are very rarely specified. We can combine the
+languages that appear less than 50 times under `other.'
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{c+c1}{\PYZsh{} get value counts}
+          \PY{n}{vc} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} replace entries that occur \PYZlt{} 50 times with \PYZsq{}other\PYZsq{}}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Language} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Language}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{vc}\PY{p}{[}\PY{n}{vc} \PY{o}{\PYZlt{}} \PY{l+m+mi}{50}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} replace null entries with \PYZsq{}any\PYZsq{}}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Language} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Language}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{ad\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}165}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x25681d51240>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{c+c1}{\PYZsh{} update Interests and Segments to be boolean columns}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Segments} \PY{o}{=} \PY{n}{segments}\PY{o}{.}\PY{n}{Segments}
+          \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Interests} \PY{o}{=} \PY{n}{interests}\PY{o}{.}\PY{n}{Interests}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}167}]:}    Spend  Impressions CandidateBallotInformation Gender  AgeBracket  \textbackslash{}
+          0   1044       137185                        NaN    NaN          35   
+          1    279        94161                        NaN    NaN          18   
+          2   6743      3149886                        NaN    NaN           0   
+          3   3698       573475                        NaN    NaN          18   
+          4    445       232906                        NaN    NaN          25   
+          
+                CountryCode       ElectoralDistrictID MetroID  Interests OsType  \textbackslash{}
+          0   united states                       NaN     NaN       True    NaN   
+          1   united states                       NaN     NaN      False    NaN   
+          2   united states  California 25th District     NaN      False    NaN   
+          3   united states                       NaN     NaN       True    NaN   
+          4  united kingdom                       NaN     NaN       True    NaN   
+          
+             Segments LocationType Language AdvancedDemographics  
+          0     False          NaN      any                  NaN  
+          1     False          NaN      any                  NaN  
+          2     False          NaN      any                  NaN  
+          3     False          NaN      any                  NaN  
+          4     False          NaN      any                  NaN  
+\end{Verbatim}
+            
+    Get the remaining column names to select when building the pipeline.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{n}{rel\PYZus{}cols} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{columns}
+          \PY{n}{rel\PYZus{}cols}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}168}]:} Index(['Spend', 'Impressions', 'CandidateBallotInformation', 'Gender',
+                 'AgeBracket', 'CountryCode', 'ElectoralDistrictID', 'MetroID',
+                 'Interests', 'OsType', 'Segments', 'LocationType', 'Language',
+                 'AdvancedDemographics'],
+                dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}188}]:} \PY{n}{X} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{ad\PYZus{}data}\PY{o}{.}\PY{n}{Impressions}
+          
+          \PY{n}{cat\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CandidateBallotInformation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ElectoralDistrictID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MetroID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OsType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LocationType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AdvancedDemographics}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{num\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{n}{cats} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+              \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{impute}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NULL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+              \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ohe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{handle\PYZus{}unknown}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+              \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{PCA}\PY{p}{(}\PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}
+          \PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{ct} \PY{o}{=} \PY{n}{ColumnTransformer}\PY{p}{(}\PY{p}{[}
+              \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat\PYZus{}cols}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cats}\PY{p}{,} \PY{n}{cat\PYZus{}cols}\PY{p}{)}\PY{p}{,}
+          \PY{c+c1}{\PYZsh{}     (\PYZsq{}num\PYZus{}cols\PYZsq{}, StandardScaler(), num\PYZus{}cols),}
+               \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}cols}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}cols}\PY{p}{)}
+          \PY{p}{]}\PY{p}{,} \PY{n}{remainder}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{passthrough}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          
+          \PY{n}{reg} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+          
+          
+          \PY{n}{pl} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ct}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}190}]:} \PY{c+c1}{\PYZsh{} separate the data into training (70\PYZpc{}) and testing (30\PYZpc{}) sets}
+          \PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} fit the model to the training set}
+          \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} calculate the score using the test set}
+          \PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}190}]:} 0.45197041482595895
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{output} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         
+             \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+             \PY{n}{output}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}191}]:} \PY{n}{scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+          \PY{n}{scores}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{positive scores in model builds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}191}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x25682a68dd8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}192}]:} \PY{n}{scores}\PY{p}{[}\PY{n}{scores}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{positive scores in model builds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scores}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+median score: 0.6021655324327034
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    So far, we have tried using Linear Regression and Random Forest
+Regression. We will now test other regressors and compare to find the
+model with the best performance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}194}]:} \PY{c+c1}{\PYZsh{} list of regression models to test}
+          \PY{n}{regs} \PY{o}{=} \PY{p}{[}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{SVR}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rbf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{0.025}\PY{p}{)}\PY{p}{,}
+              \PY{n}{NuSVR}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{AdaBoostRegressor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{p}{)}
+          \PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} test each model}
+          \PY{k}{for} \PY{n}{reg} \PY{o+ow}{in} \PY{n}{regs}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} use the column transformer we already defined}
+              \PY{n}{pl} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{n}{steps}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{column transformer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ct}\PY{p}{)}\PY{p}{,}
+                                \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}   
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{reg}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model score: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=None, normalize=False)
+model score: 0.804
+KNeighborsRegressor(algorithm='auto', leaf\_size=30, metric='minkowski',
+                    metric\_params=None, n\_jobs=None, n\_neighbors=5, p=2,
+                    weights='uniform')
+model score: 0.418
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}kchin\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}svm\textbackslash{}base.py:193: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+SVR(C=0.025, cache\_size=200, coef0=0.0, degree=3, epsilon=0.1,
+    gamma='auto\_deprecated', kernel='rbf', max\_iter=-1, shrinking=True,
+    tol=0.001, verbose=False)
+model score: -0.016
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}kchin\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}svm\textbackslash{}base.py:193: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+NuSVR(C=1.0, cache\_size=200, coef0=0.0, degree=3, gamma='auto\_deprecated',
+      kernel='rbf', max\_iter=-1, nu=0.5, shrinking=True, tol=0.001,
+      verbose=False)
+model score: -0.012
+DecisionTreeRegressor(criterion='mse', max\_depth=None, max\_features=None,
+                      max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+                      min\_impurity\_split=None, min\_samples\_leaf=1,
+                      min\_samples\_split=2, min\_weight\_fraction\_leaf=0.0,
+                      presort=False, random\_state=None, splitter='best')
+model score: 0.268
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}kchin\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}ensemble\textbackslash{}forest.py:245: FutureWarning: The default value of n\_estimators will change from 10 in version 0.20 to 100 in 0.22.
+  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+RandomForestRegressor(bootstrap=True, criterion='mse', max\_depth=None,
+                      max\_features='auto', max\_leaf\_nodes=None,
+                      min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                      min\_samples\_leaf=1, min\_samples\_split=2,
+                      min\_weight\_fraction\_leaf=0.0, n\_estimators=10,
+                      n\_jobs=None, oob\_score=False, random\_state=None,
+                      verbose=0, warm\_start=False)
+model score: 0.489
+AdaBoostRegressor(base\_estimator=None, learning\_rate=1.0, loss='linear',
+                  n\_estimators=50, random\_state=None)
+model score: 0.436
+GradientBoostingRegressor(alpha=0.9, criterion='friedman\_mse', init=None,
+                          learning\_rate=0.1, loss='ls', max\_depth=3,
+                          max\_features=None, max\_leaf\_nodes=None,
+                          min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                          min\_samples\_leaf=1, min\_samples\_split=2,
+                          min\_weight\_fraction\_leaf=0.0, n\_estimators=100,
+                          n\_iter\_no\_change=None, presort='auto',
+                          random\_state=None, subsample=1.0, tol=0.0001,
+                          validation\_fraction=0.1, verbose=0, warm\_start=False)
+model score: 0.459
+
+    \end{Verbatim}
+
+    We can see that the model with the best performance is the Linear
+Regression model by far, with a score of .804.
+
+    \hypertarget{final-model}{%
+\subsubsection{Final Model}\label{final-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} select the relevant columns}
+         \PY{n}{data} \PY{o}{=} \PY{n}{orig\PYZus{}data}\PY{p}{[}\PY{n}{rel\PYZus{}cols}\PY{p}{]}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}    Spend  Impressions CandidateBallotInformation Gender AgeBracket  \textbackslash{}
+         0   1044       137185                        NaN    NaN       35++   
+         1    279        94161                        NaN    NaN        18+   
+         2   6743      3149886                        NaN    NaN        NaN   
+         3   3698       573475                        NaN    NaN        18+   
+         4    445       232906                        NaN    NaN        25+   
+         
+               CountryCode       ElectoralDistrictID MetroID  \textbackslash{}
+         0   united states                       NaN     NaN   
+         1   united states                       NaN     NaN   
+         2   united states  California 25th District     NaN   
+         3   united states                       NaN     NaN   
+         4  united kingdom                       NaN     NaN   
+         
+                                                    Interests OsType  \textbackslash{}
+         0                                                NaN    NaN   
+         1  Arts \& Culture Mavens,Chat Fiction Enthusiasts{\ldots}    NaN   
+         2  TV Live Event Viewers (The Academy Awards),TV {\ldots}    NaN   
+         3                                                NaN    NaN   
+         4                                                NaN    NaN   
+         
+                          Segments LocationType Language AdvancedDemographics  
+         0  Provided by Advertiser          NaN      NaN                  NaN  
+         1  Provided by Advertiser          NaN      NaN                  NaN  
+         2  Provided by Advertiser          NaN      NaN                  NaN  
+         3  Provided by Advertiser          NaN      NaN                  NaN  
+         4  Provided by Advertiser          NaN      NaN                  NaN  
+\end{Verbatim}
+            
+    \hypertarget{building-the-pipeline}{%
+\paragraph{Building The Pipeline}\label{building-the-pipeline}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} separate feature and target data}
+         \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{Impressions}
+         
+         
+         \PY{c+c1}{\PYZsh{} define columns}
+         
+         \PY{c+c1}{\PYZsh{} columns to convert to booleans}
+         \PY{n}{bool\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CandidateBallotInformation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ElectoralDistrictID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MetroID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OsType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LocationType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AdvancedDemographics}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interests}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{cat\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountryCode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AgeBracket}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{num\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} adjust language}
+         \PY{c+c1}{\PYZsh{} get value counts}
+         \PY{n}{vc} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} replace entries that occur \PYZlt{} 50 times with \PYZsq{}other\PYZsq{}}
+         \PY{n}{X}\PY{o}{.}\PY{n}{Language} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{Language}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{vc}\PY{p}{[}\PY{n}{vc} \PY{o}{\PYZlt{}} \PY{l+m+mi}{50}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} replace null entries with \PYZsq{}any\PYZsq{}}
+         \PY{n}{X}\PY{o}{.}\PY{n}{Language} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{Language}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} convert certain columns to booleans}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{bool\PYZus{}cols}\PY{p}{:}
+             \PY{n}{X}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} adjust age bracket}
+         \PY{n}{X}\PY{o}{.}\PY{n}{AgeBracket} \PY{o}{=} \PY{p}{(}
+             \PY{n}{X}\PY{o}{.}\PY{n}{AgeBracket}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZca{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d]+}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} impute null values with 0, because these ads are agnostic to age}
+             \PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} convert data type from object to integer}
+             \PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{p}{)}
+\end{Verbatim}
+
+
+    After some testing, the best model found was the linear regression
+model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} create pipeline}
+         
+         \PY{n}{cats} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{impute}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NULL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ohe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{handle\PYZus{}unknown}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{PCA}\PY{p}{(}\PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{ct} \PY{o}{=} \PY{n}{ColumnTransformer}\PY{p}{(}\PY{p}{[}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat\PYZus{}cols}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cats}\PY{p}{,} \PY{n}{cat\PYZus{}cols}\PY{o}{+}\PY{n}{bool\PYZus{}cols}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}cols}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}cols}\PY{p}{)}
+         \PY{p}{]}\PY{p}{,} \PY{n}{remainder}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{passthrough}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{reg} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{pl} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ct}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reg}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} separate the data into training (70\PYZpc{}) and testing (30\PYZpc{}) sets}
+         \PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} fit the model to the training set}
+         \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} get predicted values}
+         \PY{n}{pred} \PY{o}{=} \PY{n}{pl}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} calculate the score using the test set}
+         \PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} 0.6090304011960644
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{} calculate the rmse}
+         \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{pred} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}ts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} 2600779.1436384353
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} lin reg}
+         \PY{n}{output} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{rmses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         
+             \PY{n}{pl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+             \PY{n}{output}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pl}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{y\PYZus{}ts}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+         \PY{n}{scores}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{positive scores in model builds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x25681aecba8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{scores}\PY{p}{[}\PY{n}{scores}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{positive scores in model builds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scores}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+median score: 0.6021655324327034
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From 500 tests, the median score is around .6, which is an improvement
+to the baseline model's score of about 0.52
+
+    \hypertarget{fairness-evaluation}{%
+\subsubsection{Fairness Evaluation}\label{fairness-evaluation}}
+
+    To assess the fairness, we will examine the the test data set and the
+model's predictions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{} test set feature data}
+         \PY{n}{X\PYZus{}ts}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:}       Spend  CandidateBallotInformation  Gender  AgeBracket    CountryCode  \textbackslash{}
+         3136     12                        True    True          18    netherlands   
+         2494     13                        True    True          17         norway   
+         2588      8                        True    True          18  united states   
+         3143   4706                        True    True          23         france   
+         350     196                        True    True          18  united states   
+         
+               ElectoralDistrictID  MetroID  Interests  OsType  Segments  LocationType  \textbackslash{}
+         3136                 True     True      False    True     False          True   
+         2494                 True    False       True    True     False          True   
+         2588                False     True       True    True     False          True   
+         3143                 True     True       True    True      True          True   
+         350                  True     True       True    True      True          True   
+         
+              Language  AdvancedDemographics  
+         3136    other                  True  
+         2494      any                  True  
+         2588      any                 False  
+         3143       fr                  True  
+         350        en                  True  
+\end{Verbatim}
+            
+    Combine the feature data with the target data and predictions
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{result\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{X\PYZus{}ts}\PY{p}{,} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{y\PYZus{}ts}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{pred}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{sort}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{result\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:}       Spend  CandidateBallotInformation  Gender  AgeBracket    CountryCode  \textbackslash{}
+         3136     12                        True    True          18    netherlands   
+         2494     13                        True    True          17         norway   
+         2588      8                        True    True          18  united states   
+         3143   4706                        True    True          23         france   
+         350     196                        True    True          18  united states   
+         
+               ElectoralDistrictID  MetroID  Interests  OsType  Segments  LocationType  \textbackslash{}
+         3136                 True     True      False    True     False          True   
+         2494                 True    False       True    True     False          True   
+         2588                False     True       True    True     False          True   
+         3143                 True     True       True    True      True          True   
+         350                  True     True       True    True      True          True   
+         
+              Language  AdvancedDemographics  Impressions           pred  
+         3136    other                  True        11069  480250.061881  
+         2494      any                  True         2313  639288.107864  
+         2588      any                 False         2007  110162.974941  
+         3143       fr                  True      9162404  523320.993852  
+         350        en                  True        65718  640926.616693  
+\end{Verbatim}
+            
+    To analyze the fairness of our regression model, we will look at the
+root mean squared error well specific demographics. To do this, it will
+be convenient to have a column of each ad's squared error.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{result\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sq\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{result\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{result\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{result\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:}       Spend  CandidateBallotInformation  Gender  AgeBracket    CountryCode  \textbackslash{}
+         3136     12                        True    True          18    netherlands   
+         2494     13                        True    True          17         norway   
+         2588      8                        True    True          18  united states   
+         3143   4706                        True    True          23         france   
+         350     196                        True    True          18  united states   
+         
+               ElectoralDistrictID  MetroID  Interests  OsType  Segments  LocationType  \textbackslash{}
+         3136                 True     True      False    True     False          True   
+         2494                 True    False       True    True     False          True   
+         2588                False     True       True    True     False          True   
+         3143                 True     True       True    True      True          True   
+         350                  True     True       True    True      True          True   
+         
+              Language  AdvancedDemographics  Impressions           pred      sq\_error  
+         3136    other                  True        11069  480250.061881  2.201309e+11  
+         2494      any                  True         2313  639288.107864  4.057373e+11  
+         2588      any                 False         2007  110162.974941  1.169771e+10  
+         3143       fr                  True      9162404  523320.993852  7.463376e+13  
+         350        en                  True        65718  640926.616693  3.308650e+11  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{bool\PYZus{}cols}\PY{o}{+}\PY{n}{cat\PYZus{}cols}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{result\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{n}{col}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sq\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{col}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                sq\_error
+CandidateBallotInformation              
+False                       1.575894e+12
+True                        1.154577e+13
+            sq\_error
+Gender              
+False   1.508569e+12
+True    1.174355e+13
+                         sq\_error
+ElectoralDistrictID              
+False                3.571664e+13
+True                 1.022196e+13
+             sq\_error
+MetroID              
+False    2.299004e+12
+True     1.121456e+13
+            sq\_error
+OsType              
+False   1.355699e+11
+True    1.077517e+13
+                  sq\_error
+LocationType              
+False         2.217597e+12
+True          1.077118e+13
+                          sq\_error
+AdvancedDemographics              
+False                 1.193084e+13
+True                  1.066741e+13
+               sq\_error
+Interests              
+False      6.702409e+12
+True       1.192908e+13
+              sq\_error
+Segments              
+False     1.491241e+13
+True      2.217772e+12
+                    sq\_error
+CountryCode                 
+argentina       2.551251e+11
+australia       3.372942e+13
+austria         1.074433e+14
+belgium         3.605998e+12
+canada          2.185782e+13
+denmark         1.135381e+12
+finland         6.843116e+11
+france          2.948166e+13
+germany         1.648174e+12
+india           7.305676e+11
+ireland         4.370263e+11
+kuwait          5.183968e+12
+lithuania       4.587029e+10
+netherlands     5.218414e+12
+new zealand     7.416674e+08
+nigeria         6.820553e+11
+norway          2.334455e+12
+poland          5.327193e+11
+puerto rico     3.364707e+10
+south africa    1.513583e+10
+sweden          2.887477e+11
+switzerland     8.325834e+10
+turkey          1.625710e+13
+united kingdom  2.308344e+12
+united states   9.518389e+12
+                sq\_error
+AgeBracket              
+0           5.661388e+12
+14          3.987626e+11
+15          2.435970e+13
+16          6.558161e+13
+17          4.111942e+13
+18          7.884892e+12
+19          5.366168e+11
+20          3.334177e+12
+21          1.213397e+12
+22          3.290652e+10
+23          3.749251e+13
+24          2.462607e+12
+25          3.920416e+12
+26          1.590352e+12
+28          1.289673e+11
+30          1.062281e+12
+31          1.669042e+10
+33          2.273642e+10
+34          1.619625e+11
+35          1.080891e+12
+              sq\_error
+Language              
+any       8.757534e+12
+en        1.635547e+13
+fr        4.557962e+12
+nb        3.362125e+11
+other     2.395859e+13
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} for col in bool\PYZus{}cols+cat\PYZus{}cols:}
+         \PY{c+c1}{\PYZsh{}     result\PYZus{}data[[col, \PYZsq{}sq\PYZus{}error\PYZsq{}]].groupby(col).mean().plot(kind=\PYZsq{}bar\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{} result\PYZus{}data[[\PYZsq{}Segments\PYZsq{}, \PYZsq{}sq\PYZus{}error\PYZsq{}]].groupby(\PYZsq{}Segments\PYZsq{}).mean()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} np.sqrt(np.mean((preds \PYZhy{} y\PYZus{}ts)**2))}
+         \PY{n}{result\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sq\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} 10710756844270.656
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{bool\PYZus{}cols}\PY{o}{+}\PY{n}{cat\PYZus{}cols}\PY{p}{)}\PY{p}{:}
+             \PY{n}{result\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{n}{col}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sq\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{col}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{3}])
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From these plots, we can see that most of the boolean columns are
+biased, but this is not surprising since many of those columns are
+largely null/True (\textasciitilde{}90\%). However, the segments column
+is more balanced.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{c+c1}{\PYZsh{} display counts}
+         \PY{n}{result\PYZus{}data}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:} Segments
+         False    663
+         True     328
+         Name: Spend, dtype: int64
+\end{Verbatim}
+            
+    Despite this, the ads that provide segments have much larger error than
+the ads that do not. To determine if this is actually bias and not
+chance, we will use a permutation test.
+
+    \hypertarget{use-a-permutation-test-to-see-if-the-difference-in-squared-error-can-be-explained-by-chance.}{%
+\paragraph{Use a permutation test to see if the difference in squared
+error can be explained by
+chance.}\label{use-a-permutation-test-to-see-if-the-difference-in-squared-error-can-be-explained-by-chance.}}
+
+Null Hypothesis: The model's predictions, for the number of impressions
+an ad will receive, follow the same distribution regardless of whether
+or not the ad specified a segment.
+
+Alternative Hypothesis: The model's predictions favor ads that did not
+specify a segment, predicting them more accurately.
+
+Test Statistic: Absolute difference in mean squared error.
+
+Significance level: We set a significance level of 0.01
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{c+c1}{\PYZsh{} calculate the observed test statistic}
+          \PY{n}{obs} \PY{o}{=} \PY{n}{result\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sq\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+          
+          \PY{n}{sq\PYZus{}errors} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} shuffle the values of the Segments column }
+              \PY{n}{resample} \PY{o}{=} \PY{p}{(}
+                  \PY{n}{result\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sq\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+                  \PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{Segments}\PY{o}{=}\PY{n}{result\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+              \PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} calculate test statistic}
+              \PY{n}{ts} \PY{o}{=} \PY{n}{resample}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Segments}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{n}{sq\PYZus{}errors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ts}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{c+c1}{\PYZsh{} calculate the percentage of test statistics equal to or more extreme than the observed}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{sq\PYZus{}errors} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{obs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} this is the p\PYZhy{}value}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}148}]:} 0.644
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{c+c1}{\PYZsh{} histogram plot of the absolute differences in squared error}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{sq\PYZus{}errors}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Permutation Test for sq\PYZus{}errors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{obs}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_83_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    For our test, we got a p-value of 0.644, so the difference in squared
+error between ads that did and did not specify a segment can be
+explained by random chance. We now know that our model is not biased for
+whether or not an ad specified a segment; however, there may be other
+biases that exist within our model that we have yet to explore.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
